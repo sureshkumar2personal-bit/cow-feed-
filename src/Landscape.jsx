@@ -3,6 +3,8 @@ import './Landscape.css';
 import * as Matter from 'matter-js';
 import { HandModelWrapper } from './HandComponents';
 import SmokeEffect from './SmokeEffect';
+import AtmosphereEffects from './Atmosphere';
+import DevotionalEffects from './effects/DevotionalEffects';
 
 // Hook for tab visibility changes
 function useVisibilityChange(callback) {
@@ -56,15 +58,28 @@ const [feedMessage, setFeedMessage] = useState(null);
    const [itemCounts, setItemCounts] = useState(initialItemCounts);
    const verticalItemsRef = useRef(null);
    const cowRef = useRef(null);
-   const bellAudioRef = useRef(null);
+   const animationFrameRef = useRef(null);
+   const cowVideoRef = useRef(null);
    const landscapeRef = useRef(null);
    const engineRef = useRef(null);
    const runnerRef = useRef(null);
    const renderRef = useRef(null);
    const bodiesRef = useRef({});
-   const animationFrameRef = useRef(null);
+   const [offerTrigger, setOfferTrigger] = useState(0);
+   const [totalOfferings, setTotalOfferings] = useState(0);
+   const [cowHappiness, setCowHappiness] = useState(0);
+   const prevFeedRef = useRef(null);
 
-const showHand = useCallback(() => {
+   useEffect(() => {
+     if (feedMessage && !prevFeedRef.current) {
+       setOfferTrigger(t => t + 1);
+       setTotalOfferings(t => t + 1);
+       setCowHappiness(h => Math.min(50, h + 5));
+     }
+     prevFeedRef.current = feedMessage;
+   }, [feedMessage]);
+
+   const showHand = useCallback(() => {
       setHandVisible(true);
       setIsWalking(true);
 
@@ -206,34 +221,19 @@ const fetchItem = (itemKey) => {
       };
     }, [heldItem, hoveredItem, itemCounts, activeRitualCursor]);
 
-   // Bell sound effect - plays every 7 seconds after user interaction
-    const [userInteracted, setUserInteracted] = useState(false);
-    useEffect(() => {
-      const handleFirstInteraction = () => {
-        setUserInteracted(true);
-        window.removeEventListener('click', handleFirstInteraction);
-        window.removeEventListener('touchstart', handleFirstInteraction);
-      };
-      window.addEventListener('click', handleFirstInteraction);
-      window.addEventListener('touchstart', handleFirstInteraction);
-      return () => {
-        window.removeEventListener('click', handleFirstInteraction);
-        window.removeEventListener('touchstart', handleFirstInteraction);
-      };
-    }, []);
+  const ghorusRef = useRef(null);
 
-    useEffect(() => {
-      if (!userInteracted) return;
-      const playBellSound = () => {
-        if (bellAudioRef.current) {
-          bellAudioRef.current.currentTime = 0;
-          bellAudioRef.current.play().catch(() => {});
-        }
-      };
-      playBellSound();
-      const bellInterval = setInterval(playBellSound, 7000);
-      return () => clearInterval(bellInterval);
-    }, [userInteracted]);
+  useEffect(() => {
+    const start = () => {
+      if (ghorusRef.current) {
+        ghorusRef.current.play().catch(() => {});
+      }
+      window.removeEventListener('click', start);
+      window.removeEventListener('touchstart', start);
+    };
+    window.addEventListener('click', start, { once: true });
+    window.addEventListener('touchstart', start, { once: true });
+  }, []);
 
   const [webglAvailable] = useState(() => {
      if (typeof document === 'undefined') return false;
@@ -384,6 +384,7 @@ onKeyDown={(e) => {
 
             <div ref={cowRef} className="cow-emoji" style={{ left: '400px', bottom: '0%', position: 'absolute', transform: 'translateX(-50%)', zIndex: 3 }}>
             <video
+              ref={cowVideoRef}
               src="/cowm.webm"
               className="cow-video"
               autoPlay
@@ -391,7 +392,7 @@ onKeyDown={(e) => {
               muted
               playsInline
               onLoadedMetadata={(e) => {
-                e.target.currentTime = 2; // Start from 2nd second
+                e.target.currentTime = 2;
               }}
               onTimeUpdate={(e) => {
                 if (e.target.currentTime >= 4.8) {
@@ -399,8 +400,6 @@ onKeyDown={(e) => {
                 }
               }}
              />
-              {/* Cow Bell on Neck */}
-
             </div>
 
       {/* Tree image */}
@@ -637,13 +636,10 @@ onKeyDown={(e) => {
 
 
 
-        {/* Cow Bell Sound Effect */}
-        <audio
-          ref={bellAudioRef}
-          src="/cowbell.mp3"
-          preload="auto"
-          style={{ display: 'none' }}
-        />
+        <AtmosphereEffects />
+        <DevotionalEffects offerTrigger={offerTrigger} cowRef={cowRef} totalOfferings={totalOfferings} happiness={cowHappiness} />
+
+        <audio ref={ghorusRef} src="/cowbellghorus.mp3" preload="auto" loop />
       </div>
     );
   }

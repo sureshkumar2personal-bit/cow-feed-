@@ -245,6 +245,13 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 14px 12px;
+  border-radius: 20px;
+  background: rgba(180, 120, 60, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .ritual-circle {
@@ -365,14 +372,37 @@
   transform: scale(0.96);
 }
 
-@media (max-width: 720px) {
+/* ===== RESPONSIVE — LARGE SCREENS ===== */
+@media (min-width: 1400px) {
+  .tree-image, .cow-video { width: min(500px, 55vw); }
+}
+
+/* ===== RESPONSIVE — TABLET / SMALL DESKTOP (720–1024px) ===== */
+@media (max-width: 1024px) {
+  .tree-image, .cow-video { width: min(420px, 65vw); }
+  .cow-video { max-height: 60vh; }
+  .cow-emoji { transform: translateY(-5px); }
+}
+
+/* ===== RESPONSIVE — MEDIUM (481–767px) ===== */
+@media (max-width: 767px) {
+  .tree-image, .cow-video { width: min(360px, 75vw); }
+  .cow-video { max-height: 55vh; }
+  .cow-emoji { transform: translateY(-5px); }
+  .cow-bell { width: 26px; height: 26px; }
+
+  .about-icon, .social-share-icon { width: 28px; height: 28px; }
+  .coin-balance { font-size: 0.85rem; padding: 4px 10px; }
+  .coin-icon { width: 16px; height: 16px; }
+
+  .hint-text { font-size: 1.1rem; }
+
   .vertical-items {
     bottom: 3%;
     gap: 8px;
     max-width: calc(100vw - 16px);
-    padding-left: 20px;
+    padding-left: 16px;
   }
-
   .feed-item-row {
     width: 100px;
     min-width: 100px;
@@ -381,44 +411,395 @@
     padding: 8px;
     border-radius: 24px;
   }
+  .item-image-shell { width: 54px; height: 54px; }
+  .vertical-item { width: 46px; height: 46px; }
+  .item-count, .item-count-control { font-size: 1rem; }
+  .item-count-control { width: 26px; height: 26px; }
+  .item-coin-badge { min-width: 72px; padding: 4px 7px; font-size: 0.7rem; }
 
-  .item-image-shell {
-    width: 54px;
-    height: 54px;
-  }
+  .ritual-items { padding: 12px 10px; gap: 10px; border-radius: 18px; }
+  .ritual-circle { width: 44px; height: 44px; font-size: 1.2rem; }
 
-  .vertical-item {
-    width: 46px;
-    height: 46px;
-  }
+  .punya-meter { top: 12px; left: 12px; min-width: 120px; padding: 8px 10px; }
+  .punya-label { font-size: 8px; }
+  .punya-level { font-size: 10px; }
+  .punya-bar { height: 5px; }
+  .temple-bell-icon { font-size: 42px; }
 
-  .item-count,
-  .item-count-control {
-    font-size: 1rem;
-  }
+  .blessing-quote { font-size: 0.85rem; max-width: 240px; padding: 10px 16px; }
+  .prasadam-text { font-size: 0.9rem; }
+  .mantra-text { font-size: 1.3rem; }
 
-  .item-count-control {
-    width: 26px;
-    height: 26px;
-  }
-
-  .item-coin-badge {
-    min-width: 72px;
-    padding: 4px 7px;
-    font-size: 0.7rem;
-  }
+  /* Devotional effects scaling */
+  .particle { width: 5px; height: 5px; }
+  .petal { width: 14px; height: 14px; }
+  .light-ray { width: 60px; }
 }
 
-/* Additional responsive for all devices */
+/* ===== RESPONSIVE — MOBILE (361–480px) ===== */
 @media (max-width: 480px) {
-  .vertical-items { padding-left: 10px; gap: 6px; }
+  .vertical-items { padding-left: 8px; gap: 6px; }
   .feed-item-row { width: 80px; min-width: 80px; }
-  .tree-image, .cow-video { width: 300px; }
-  .cow-bell { width: 24px; height: 24px; }
-  .ritual-circle { width: 38px; height: 38px; font-size: 1.1rem; }
+  .tree-image, .cow-video { width: min(300px, 85vw); }
+  .cow-video { max-height: 45vh; }
+  .cow-bell { width: 22px; height: 22px; }
+
+  .about-icon, .social-share-icon { width: 24px; height: 24px; }
+  .coin-balance { font-size: 0.75rem; padding: 3px 8px; }
+  .coin-icon { width: 14px; height: 14px; }
+
+  .hint-text { font-size: 0.9rem; }
+
+  .ritual-circle { width: 36px; height: 36px; font-size: 1rem; }
+  .ritual-items { padding: 10px 8px; gap: 8px; }
+
+  .item-image-shell { width: 42px; height: 42px; }
+  .vertical-item { width: 36px; height: 36px; }
+  .item-coin-badge { min-width: 58px; padding: 3px 5px; font-size: 0.6rem; }
+  .item-count, .item-count-control { font-size: 0.85rem; }
+  .item-count-control { width: 22px; height: 22px; }
+
+  .punya-meter { top: 8px; left: 8px; min-width: 100px; padding: 6px 8px; }
+  .punya-level { font-size: 9px; }
+  .punya-bar { height: 4px; }
+
+  .temple-bell-icon { font-size: 36px; }
+  .blessing-quote { font-size: 0.75rem; max-width: 200px; padding: 8px 12px; }
+  .prasadam-text { font-size: 0.8rem; }
+  .mantra-text { font-size: 1.1rem; }
+
+  .particle { width: 4px; height: 4px; }
+  .petal { width: 12px; height: 12px; }
+  .light-ray { width: 50px; }
+
+  .conch-overlay { font-size: 2.5rem; }
 }
 
+/* ===== RESPONSIVE — SMALL MOBILE (<=360px) ===== */
 @media (max-width: 360px) {
-  .vertical-items { padding-left: 5px; }
-  .feed-item-row { width: 70px; min-width: 70px; }
+  .vertical-items { padding-left: 4px; gap: 4px; }
+  .feed-item-row { width: 64px; min-width: 64px; padding: 5px; gap: 3px; }
+
+  .tree-image, .cow-video { width: min(260px, 92vw); }
+  .cow-bell { width: 18px; height: 18px; }
+
+  .item-image-shell { width: 34px; height: 34px; }
+  .vertical-item { width: 30px; height: 30px; }
+  .item-coin-badge { min-width: 50px; font-size: 0.55rem; padding: 2px 4px; }
+  .item-count, .item-count-control { font-size: 0.75rem; }
+  .item-count-control { width: 20px; height: 20px; }
+
+  .ritual-circle { width: 30px; height: 30px; font-size: 0.85rem; }
+  .ritual-items { padding: 8px 6px; gap: 6px; border-radius: 14px; }
+
+  .punya-meter { top: 6px; left: 6px; min-width: 80px; padding: 5px 6px; }
+  .punya-level { font-size: 8px; }
+  .punya-bar { height: 3px; }
+
+  .temple-bell-icon { font-size: 28px; }
+  .blessing-quote { font-size: 0.65rem; max-width: 160px; padding: 6px 10px; }
+
+  .hand-grass { width: 36px; height: 36px; }
+}
+
+/* ===== RESPONSIVE — LANDSCAPE MOBILE ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+  .tree-image, .cow-video { width: min(280px, 50vw); max-height: 70vh; }
+  .cow-emoji { transform: translateY(-3px); }
+
+  .vertical-items {
+    bottom: 2%;
+    gap: 4px;
+    padding-left: 8px;
+  }
+  .feed-item-row { width: 70px; min-width: 70px; padding: 5px; }
+  .item-image-shell { width: 36px; height: 36px; }
+  .vertical-item { width: 30px; height: 30px; }
+
+  .ritual-circle { width: 30px; height: 30px; font-size: 0.9rem; }
+  .ritual-items { padding: 8px 6px; gap: 6px; }
+
+  .punya-meter { top: 6px; left: 6px; min-width: 90px; padding: 5px 7px; }
+  .punya-level { font-size: 8px; }
+
+  .coin-balance { font-size: 0.7rem; padding: 2px 8px; }
+  .about-icon, .social-share-icon { width: 22px; height: 22px; }
+
+  .temple-bell-icon { font-size: 30px; }
+  .hint-text { font-size: 0.8rem; }
+  .hand-grass { width: 32px; height: 32px; }
+
+  .conch-overlay { font-size: 2rem; }
+}
+
+@keyframes dustFloat {
+  0% { transform: translate(0, 0); opacity: 0; }
+  8% { opacity: 0.65; }
+  35% { transform: translate(var(--drift-x, 15px), var(--drift-y, -12px)); opacity: 0.75; }
+  65% { opacity: 0.4; }
+  100% { transform: translate(calc(var(--drift-x, 15px) * 1.5), calc(var(--drift-y, -12px) * 1.8)); opacity: 0; }
+}
+
+@keyframes rayPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes raySway {
+  0%, 100% { transform: rotate(var(--ray-angle, 22deg)) scaleX(1); opacity: 0.5; }
+  25% { opacity: 0.8; }
+  50% { transform: rotate(calc(var(--ray-angle, 22deg) + 3deg)) scaleX(1.05); opacity: 1; }
+  75% { opacity: 0.7; }
+}
+
+@keyframes leafFall {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  5% { opacity: 1; }
+  25% { transform: translate(var(--sway, 30px), 30vh) rotate(90deg); }
+  50% { transform: translate(calc(var(--sway, 30px) * -0.6), 55vh) rotate(180deg); }
+  75% { transform: translate(calc(var(--sway, 30px) * 0.4), 80vh) rotate(270deg); opacity: 0.8; }
+  100% { transform: translate(calc(var(--sway, 30px) * -0.8), 110vh) rotate(360deg); opacity: 0; }
+}
+
+/* ─── Devotional Effects ─── */
+
+.temple-bell-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 200px;
+}
+
+.temple-bell-icon {
+  font-size: 60px;
+  animation: bellSwing 1s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.7));
+}
+
+.temple-bell-glow {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+  animation: glowFade 1.2s ease-out forwards;
+}
+
+.temple-bell-quote {
+  font-family: 'Georgia', serif;
+  font-size: 14px;
+  color: #ffd700;
+  text-align: center;
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.5), 0 0 24px rgba(255, 215, 0, 0.2);
+  opacity: 0;
+  animation: quoteFade 3s ease-in-out forwards;
+  max-width: 280px;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+@keyframes quoteFade {
+  0% { opacity: 0; transform: translateY(8px); }
+  15% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes bellSwing {
+  0%, 100% { transform: rotate(-15deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes glowFade {
+  0% { opacity: 1; transform: scale(0.5); }
+  100% { opacity: 0; transform: scale(2); }
+}
+
+.blessing-particle {
+  position: fixed;
+  border-radius: 50%;
+  background: #ffd700;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 200, 50, 0.4);
+  pointer-events: none;
+  animation: particleRise var(--dur, 1.5s) ease-out var(--delay, 0s) forwards;
+}
+
+@keyframes particleRise {
+  0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+  100% { transform: translate(var(--dx, 0px), var(--dy, -100px)) scale(1.2); opacity: 0; }
+}
+
+.light-rays-container {
+  position: fixed;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: none;
+  display: flex;
+  gap: 0;
+}
+
+.light-ray-beam {
+  width: 40px;
+  height: 300px;
+  background: linear-gradient(180deg, rgba(255, 215, 0, 0.12) 0%, transparent 100%);
+  transform-origin: bottom center;
+  filter: blur(8px);
+  animation: rayFlare 2s ease-out forwards;
+}
+
+@keyframes rayFlare {
+  0% { opacity: 0; transform: rotate(0deg) scaleY(0.3); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(var(--angle, 0deg)) scaleY(1); }
+}
+
+.petal-particle {
+  position: fixed;
+  pointer-events: none;
+  animation: petalFall var(--dur, 2.5s) ease-in var(--delay, 0s) forwards;
+}
+
+@keyframes petalFall {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  30% { transform: translate(var(--sway, 20px), 30vh) rotate(120deg); opacity: 1; }
+  60% { transform: translate(calc(var(--sway, 20px) * -0.5), 60vh) rotate(240deg); opacity: 0.8; }
+  100% { transform: translate(calc(var(--sway, 20px) * 0.7), 110vh) rotate(360deg); opacity: 0; }
+}
+
+.floating-mantra {
+  position: fixed;
+  font-family: 'Georgia', serif;
+  color: rgba(255, 220, 150, 0.2);
+  pointer-events: none;
+  user-select: none;
+  animation: mantraFloat var(--dur, 0.01s) ease-in-out forwards;
+}
+
+@keyframes mantraFloat {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  10% { opacity: 0.7; }
+  30% { opacity:8; }
+  50% { transform: translateY(-100px) scale(1); opacity: 0.65; }
+  75% { opacity: 0.1; }
+  100% { transform: translateY(-180px) scale(1.1); opacity: 0; }
+}
+
+.punya-meter {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 20;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 180, 50, 0.08));
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 12px;
+  padding: 10px 14px;
+  min-width: 150px;
+  backdrop-filter: blur(6px);
+  font-family: 'Georgia', serif;
+}
+
+.punya-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.punya-icon {
+  font-size: 16px;
+}
+
+.punya-level {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.punya-bar-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.punya-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.punya-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: rgba(255, 215, 0, 0.5);
+  margin-top: 4px;
+}
+
+.prasadam-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10002;
+  pointer-events: none;
+  animation: prasadamIn 0.4s ease-out forwards;
+}
+
+.prasadam-card {
+  background: linear-gradient(135deg, #2d1810, #4a2c1a);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 16px;
+  padding: 20px 32px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.1);
+}
+
+.prasadam-emoji {
+  font-size: 40px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+}
+
+.prasadam-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.prasadam-sub {
+  font-size: 11px;
+  color: rgba(255, 215, 0, 0.5);
+  margin-top: 4px;
+}
+
+@keyframes prasadamIn {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.7); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ===== RESPONSIVE — PUNYA METER (additional overrides) ===== */
+@media (max-width: 720px) {
+  .punya-meter {
+    top: 12px;
+    left: 12px;
+    min-width: 120px;
+    padding: 8px 10px;
+  }
+  .punya-level { font-size: 10px; }
+  .temple-bell-icon { font-size: 40px; }
 }
